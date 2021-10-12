@@ -10,7 +10,7 @@ export function Header( props: HeaderProps ) {
           variant = "h6"
           component = "div"
           sx = {{ flexGrow: 1 }}>
-          News
+          React Playlist Maker
         </Typography>
         <Button color = "inherit">Login</Button>
       </Toolbar>
