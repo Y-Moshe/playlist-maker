@@ -1666,6 +1666,11 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@seznam/compose-react-refs@^1.0.4":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@seznam/compose-react-refs/-/compose-react-refs-1.0.6.tgz#6ec4e70bdd6e32f8e70b4100f27267cf306bd8df"
+  integrity sha512-izzOXQfeQLonzrIQb8u6LQ8dk+ymz3WXTIXjvOlTXHq6sbzROg3NWU+9TTAOpEoK9Bth24/6F/XrfHJ5yR5n6Q==
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.2.tgz#858f5c4b48d80778fde4b9d541f27edc0d56488b"
@@ -1679,6 +1684,11 @@
   integrity sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@stencil/core@^2.8.1":
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.1.tgz#21b15c115d9a5e2f56379774fcbd9bc947bf336f"
+  integrity sha512-iv9J6oLO/lv7/aO45M05yw3pp1J7olY400vlOZgdMVs3s5zHfalY1ZPYM0KyqU4+7DZuadKYbd0aQZ/g2PInZw==
 
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   version "1.4.2"
@@ -1895,6 +1905,11 @@
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
+
+"@types/fscreen@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/fscreen/-/fscreen-1.0.1.tgz#d924e07d0468eb056abeca41bd54e742ddce2b6d"
+  integrity sha512-hV2d0BreihMGtrg+EdAFOIl/O2EL5vhAheHJUztGE/lPFZIN8ZCpGFL8hCbtyi1CfhKjDRCf47sHjP+FwJ4q0Q==
 
 "@types/glob@^7.1.1":
   version "7.1.3"
@@ -2218,6 +2233,25 @@
   dependencies:
     "@typescript-eslint/types" "4.15.2"
     eslint-visitor-keys "^2.0.0"
+
+"@vime/core@^5.0.34":
+  version "5.0.34"
+  resolved "https://registry.yarnpkg.com/@vime/core/-/core-5.0.34.tgz#47cac6c398f0079fae663588b6a916eba1fa879c"
+  integrity sha512-YkZzT3OsRsoTkN7mI99AFGqOGMdvZiUHJ3k9wcWHhHBwZVrfj05ozlVO7704/MAMxObIe5puUfRFt6Pkhq3lfw==
+  dependencies:
+    "@stencil/core" "^2.8.1"
+    "@types/fscreen" "^1.0.1"
+    fscreen "^1.2.0"
+    mitt "^3.0.0"
+    stencil-wormhole "^3.4.1"
+
+"@vime/react@^5.0.34":
+  version "5.0.34"
+  resolved "https://registry.yarnpkg.com/@vime/react/-/react-5.0.34.tgz#1fb02eb2b0d0c22618050adada8208784dae24ad"
+  integrity sha512-9VX024wMnc5vgNP/APaMhjWpLNRhqSCIqAb7ssj0SLpntRJl7vH8xT4XPqdFNCI5K2O0kAVAvF5Q0O3Hg1swfQ==
+  dependencies:
+    "@seznam/compose-react-refs" "^1.0.4"
+    "@vime/core" "^5.0.34"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -5417,6 +5451,11 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
+fscreen@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fscreen/-/fscreen-1.2.0.tgz#1a8c88e06bc16a07b473ad96196fb06d6657f59e"
+  integrity sha512-hlq4+BU0hlPmwsFjwGGzZ+OZ9N/wq9Ljg/sq3pX+2CD7hrJsX9tJgWWK/wiNTFM212CLHWhicOoqwXyZGGetJg==
+
 fsevents@^1.2.7:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.13.tgz#f325cb0455592428bcf11b383370ef70e3bfcc38"
@@ -7542,6 +7581,11 @@ mississippi@^3.0.0:
     pumpify "^1.3.3"
     stream-each "^1.1.0"
     through2 "^2.0.0"
+
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
 
 mixin-deep@^1.2.0:
   version "1.3.2"
@@ -10394,6 +10438,11 @@ stealthy-require@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha1-NbCYdbT/SfJqd35QmzCQoyJr8ks=
+
+stencil-wormhole@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/stencil-wormhole/-/stencil-wormhole-3.4.1.tgz#f6c74d38cca38470884fca7353486620072d3734"
+  integrity sha512-ppYTcWTJnIl4ZAKwF39LTA9f/ypHfbVefsHdN2hpMQGrR57wt1TieZo9tlCM/r1Y4SFiZ5yz/cjho564C921Xw==
 
 stream-browserify@^2.0.1:
   version "2.0.2"
