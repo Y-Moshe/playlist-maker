@@ -1,4 +1,5 @@
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import { Settings } from '@mui/icons-material';
 
 interface HeaderProps {}
 
@@ -12,7 +13,9 @@ export function Header( props: HeaderProps ) {
           sx = {{ flexGrow: 1 }}>
           React Playlist Maker
         </Typography>
-        <Button color = "inherit">Login</Button>
+        <IconButton color = "inherit">
+          <Settings />
+        </IconButton>
       </Toolbar>
     </AppBar>
   )
