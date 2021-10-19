@@ -3,7 +3,7 @@ import { Button, Box } from '@mui/material';
 
 import { Footer, Header, LeftColumn, RightColumn } from './Components';
 
-function App() {
+export default function App() {
   return (
     <div style = {{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
@@ -19,12 +19,13 @@ function App() {
           <Button>Save playlist</Button>
         </Box>
 
-        <RightColumn />
+        <RightColumn
+          onVideoClick = { videoId => console.log( videoId ) }
+          onAddVideo   = { videoId => console.log( videoId ) }
+        />
       </Box>
 
       <Footer />
     </div>
   );
 }
-
-export default App;
