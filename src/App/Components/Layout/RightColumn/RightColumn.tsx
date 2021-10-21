@@ -3,10 +3,12 @@ import { TextField, Divider, Button } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { Box, SxProps, Theme } from '@mui/system';
 
+import { VideoPlaceholder } from '../../../Components';
+import { VideoPlaceholderType } from '../../../Types';
 import { searchVideos } from '../../../../API';
 
 const rightColumnStyle: SxProps<Theme> = {
-  width: 250,
+  width: 350,
   p: 1.5
 };
 
@@ -17,12 +19,20 @@ interface RightColumnProps {
 
 export function RightColumn( props: RightColumnProps ) {
   const [ searchInput, setSearchInput ] = useState( '' );
+  const [ videoList,   setVideoList ] = useState<VideoPlaceholderType[]>();
 
   const handleClick = () => {
     searchVideos( searchInput, 10 )
       .then( response => {
-        console.log(response);
-        
+        const videoListObjects = response.data.items.map( item => {
+          return {
+            id: item.id.videoId,
+            thumbnail: item.snippet.thumbnails.medium,
+            title: item.snippet.title
+          }
+        });
+
+        setVideoList( videoListObjects );
       }).catch( e => console.log( e ));
   }
 
@@ -47,10 +57,18 @@ export function RightColumn( props: RightColumnProps ) {
       </Box>
       <Divider />
       <p>Results:</p>
-      <div>Video #1</div>
-      <div>Video #2</div>
-      <div>Video #3</div>
-      <div>...</div>
+      {
+        videoList?.map( item => (
+          <VideoPlaceholder
+            key = { item.id }
+            videoId   = { item.id }
+            thumbnail = { item.thumbnail }
+            title     = { item.title }
+            onAddToPlaylist = { videoId => console.log( videoId ) }
+            onPlayVideo = { videoId => console.log( videoId ) }
+          />
+        ))
+      }
       <Divider />
       <p>Suggested:</p>
       <div>Video #1</div>
