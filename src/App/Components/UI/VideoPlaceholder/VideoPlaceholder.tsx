@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
+import { useSpring, a } from 'react-spring';
 import { Box, Button } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
 import { Add, PlayArrow } from '@mui/icons-material';
-import { useSpring, a } from 'react-spring';
 
 import { ThumbnailType } from '../../../Types';
 
@@ -33,16 +33,17 @@ const titleStyle: CSSProperties = {
   position: 'absolute',
   top: 0,
   zIndex: 10,
-  margin: 3
+  margin: 3,
+  color: 'white'
 };
 
-const actionStyle: SxProps<Theme> = {
+const actionStyle: CSSProperties = {
   position: 'absolute',
-  bottom: 0,
   zIndex: 10,
   display: 'flex',
   justifyContent: 'space-between',
-  width: 1
+  width: '100%',
+  bottom: 0
 };
 
 const slider: CSSProperties = {
@@ -62,6 +63,14 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
       tension: 200
     }
   }));
+
+  const [ slideInActions, slideInActionsCtrl ] = useSpring(() => ({
+    from: { opacity: 0, transform: 'translateY(50px)' }
+  }));
+
+  const [ slideInTitle, slideInTitleCtrl ] = useSpring(() => ({
+    from: { opacity: 0, transform: 'translateY(-50px)' }
+  }));
   
   const handleShadowSlide = ( e: 'enter' | 'leave' ) => {
     switch ( e ) {
@@ -71,13 +80,29 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
           to: { transform: 'scale(1)' },
           config: { mass: 3, tension: 280 }
         }).start();
+        slideInActionsCtrl.update({
+          from: { opacity: 0, transform: 'translateY(50px)' },
+          to: { opacity: 1, transform: 'translateY(0)' }
+        }).start();
+        slideInTitleCtrl.update({
+          from: { opacity: 0, transform: 'translateY(-50px)' },
+          to: { opacity: 1, transform: 'translateY(0)' }
+        }).start();
         break;
       case 'leave':
-        slideAnimCtrl.update({
-          from: { transform: 'scale(1)' },
-          to: { transform: 'scale(0)' },
-          config: { mass: 1 }
-        }).start();
+          slideAnimCtrl.update({
+            from: { transform: 'scale(1)' },
+            to: { transform: 'scale(0)' },
+            config: { mass: 1 }
+          }).start();
+          slideInActionsCtrl.update({
+            from: { opacity: 1, transform: 'translateY(0)' },
+            to: { opacity: 0, transform: 'translateY(-50px)' }
+          }).start();
+          slideInTitleCtrl.update({
+            from: { opacity: 1, transform: 'translateY(0)' },
+            to: { opacity: 0, transform: 'translateY(50px)' }
+          }).start();
         break;
     }
   };
@@ -92,20 +117,22 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
         alt   = "video"
         style = { imageStyle }
       />
-      <p style = { titleStyle }>{ props.title }</p>
+      <a.p style = {{ ...titleStyle, ...slideInTitle }}>{ props.title }</a.p>
       <a.div style = {{ ...slider, ...slideAnim }}></a.div>
-      <Box sx = { actionStyle }>
+      <a.div style = {{ ...actionStyle, ...slideInActions }}>
         <Button
+          color = "error"
           startIcon = { <PlayArrow /> }
           onClick   = { () => props.onPlayVideo( props.videoId ) }>
           Play
         </Button>
         <Button
+          color = "info"
           startIcon = { <Add /> }
           onClick   = { () => props.onAddToPlaylist( props.videoId ) }>
           Add to Playlist
         </Button>
-      </Box>
+      </a.div>
     </Box>
   )
 }
