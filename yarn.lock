@@ -1777,10 +1777,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stencil/core@^2.8.1":
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.1.tgz#21b15c115d9a5e2f56379774fcbd9bc947bf336f"
-  integrity sha512-iv9J6oLO/lv7/aO45M05yw3pp1J7olY400vlOZgdMVs3s5zHfalY1ZPYM0KyqU4+7DZuadKYbd0aQZ/g2PInZw==
+"@stencil/core@2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.5.2.tgz#ad00d495ee37bbed4044524d59c7f22de15ab4a7"
+  integrity sha512-bgjPXkSzzg1WnTgVUm6m5ZzpKt602WmA/QljODAW1xVN40OHJdbGblzF/F6MFzqv2c5Cy30CB41arc8qADIdcQ==
 
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   version "1.4.2"
@@ -2326,24 +2326,24 @@
     "@typescript-eslint/types" "4.15.2"
     eslint-visitor-keys "^2.0.0"
 
-"@vime/core@^5.0.34":
-  version "5.0.34"
-  resolved "https://registry.yarnpkg.com/@vime/core/-/core-5.0.34.tgz#47cac6c398f0079fae663588b6a916eba1fa879c"
-  integrity sha512-YkZzT3OsRsoTkN7mI99AFGqOGMdvZiUHJ3k9wcWHhHBwZVrfj05ozlVO7704/MAMxObIe5puUfRFt6Pkhq3lfw==
+"@vime/core@^5.0.35":
+  version "5.0.35"
+  resolved "https://registry.yarnpkg.com/@vime/core/-/core-5.0.35.tgz#87aa537990c1d7caa970a7001741ab8be4598082"
+  integrity sha512-ncNuNjmMw55PzavH+/JXY0OPpEBZWBwSgeNPr/fUVASByZPPRp6K0WAAdWozy5zVxR5mi6Qa+rCna5MYSCxaMg==
   dependencies:
-    "@stencil/core" "^2.8.1"
+    "@stencil/core" "2.5.2"
     "@types/fscreen" "^1.0.1"
     fscreen "^1.2.0"
     mitt "^3.0.0"
     stencil-wormhole "^3.4.1"
 
-"@vime/react@^5.0.34":
-  version "5.0.34"
-  resolved "https://registry.yarnpkg.com/@vime/react/-/react-5.0.34.tgz#1fb02eb2b0d0c22618050adada8208784dae24ad"
-  integrity sha512-9VX024wMnc5vgNP/APaMhjWpLNRhqSCIqAb7ssj0SLpntRJl7vH8xT4XPqdFNCI5K2O0kAVAvF5Q0O3Hg1swfQ==
+"@vime/react@^5.0.35":
+  version "5.0.35"
+  resolved "https://registry.yarnpkg.com/@vime/react/-/react-5.0.35.tgz#ba34ebc5fd73789cb49eed31dbe049c3b0d9e556"
+  integrity sha512-8SL+biRUgu9UOo9Mr9rxiXa52uVMtK2WONIfbcBlnkVXPJEy7nPyJc6uzigAUNf+5U+V9v3+u7C1O37mrcxpLA==
   dependencies:
     "@seznam/compose-react-refs" "^1.0.4"
-    "@vime/core" "^5.0.34"
+    "@vime/core" "^5.0.35"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
