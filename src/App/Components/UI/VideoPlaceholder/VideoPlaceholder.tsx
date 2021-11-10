@@ -4,15 +4,7 @@ import { Box, Button } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
 import { Add, PlayArrow } from '@mui/icons-material';
 
-import { ThumbnailType } from '../../../Types';
-
-export interface VideoPlaceholderProps {
-  videoId: string;
-  thumbnail: ThumbnailType;
-  title: string;
-  onAddToPlaylist: ( videoId: string ) => void;
-  onPlayVideo: ( videoId: string ) => void;
-}
+import { ThumbnailType, VideoPlaceholderType } from '../../../Types';
 
 const videoPlaceholderStyle: SxProps<Theme> = {
   m: 1,
@@ -26,7 +18,8 @@ const videoPlaceholderStyle: SxProps<Theme> = {
 const imageStyle: CSSProperties = {
   position: 'absolute',
   borderRadius: 7,
-  zIndex: 5
+  zIndex: 5,
+  maxHeight: '100%'
 };
 
 const titleStyle: CSSProperties = {
@@ -53,6 +46,14 @@ const slider: CSSProperties = {
   position: 'absolute',
   borderRadius: 8,
   background: 'linear-gradient(rgba(0, 0, 0, 0.8), transparent 80%, rgba(0, 0, 0, 0.8) 15%)'
+};
+
+export interface VideoPlaceholderProps {
+  videoId: string;
+  thumbnail: ThumbnailType;
+  title: string;
+  onAddToPlaylist: ( vidProps: VideoPlaceholderType ) => void;
+  onPlayVideo: ( videoId: string ) => void;
 }
 
 export function VideoPlaceholder( props: VideoPlaceholderProps ) {
@@ -78,7 +79,8 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
         slideAnimCtrl.update({
           from: { transform: 'scale(0.5)' },
           to: { transform: 'scale(1)' },
-          config: { mass: 3, tension: 280 }
+          config: { mass: 3, tension: 280 },
+          delay: 300
         }).start();
         slideInActionsCtrl.update({
           from: { opacity: 0, transform: 'translateY(50px)' },
@@ -107,6 +109,14 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
     }
   };
 
+  const handleAddToPlaylist = () => {
+    props.onAddToPlaylist({
+      id: props.videoId,
+      title: props.title,
+      thumbnail: props.thumbnail
+    });
+  };
+
   return (
     <Box
       sx = { videoPlaceholderStyle }
@@ -128,9 +138,8 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
         </Button>
         <Button
           color = "info"
-          startIcon = { <Add /> }
-          onClick   = { () => props.onAddToPlaylist( props.videoId ) }>
-          Add to Playlist
+          onClick   = { handleAddToPlaylist }>
+            <Add titleAccess = "Add to Playlist" />
         </Button>
       </a.div>
     </Box>
