@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { useSpring, a } from 'react-spring';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Tooltip } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
 import { Add, PlayArrow } from '@mui/icons-material';
 
@@ -130,17 +130,21 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
       <a.p style = {{ ...titleStyle, ...slideInTitle }}>{ props.title }</a.p>
       <a.div style = {{ ...slider, ...slideAnim }}></a.div>
       <a.div style = {{ ...actionStyle, ...slideInActions }}>
-        <Button
-          color = "error"
-          startIcon = { <PlayArrow /> }
-          onClick   = { () => props.onPlayVideo( props.videoId ) }>
-          Play
-        </Button>
-        <Button
-          color = "info"
-          onClick   = { handleAddToPlaylist }>
-            <Add titleAccess = "Add to Playlist" />
-        </Button>
+        <Tooltip title = "Play this Video">
+          <Button
+            color = "error"
+            startIcon = { <PlayArrow /> }
+            onClick   = { () => props.onPlayVideo( props.videoId ) }>
+            Play
+          </Button>
+        </Tooltip>
+        <Tooltip title ="Add to Playlist">
+          <Button
+            color = "info"
+            onClick   = { handleAddToPlaylist }>
+              <Add titleAccess = "Add to Playlist" />
+          </Button>
+        </Tooltip>
       </a.div>
     </Box>
   )
