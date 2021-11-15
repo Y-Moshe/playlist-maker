@@ -58,7 +58,7 @@ export interface VideoPlaceholderProps {
 
 export function VideoPlaceholder( props: VideoPlaceholderProps ) {
   const [ slideAnim, slideAnimCtrl ] = useSpring(() => ({
-    from: { transform: 'scale(0)' },
+    from: { transform: 'scale(0)', opacity: 0 },
     config: {
       mass: 2,
       tension: 200
@@ -77,10 +77,10 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
     switch ( e ) {
       case 'enter':
         slideAnimCtrl.update({
-          from: { transform: 'scale(0.5)' },
-          to: { transform: 'scale(1)' },
+          from: { transform: 'scale(0.5)', opacity: 0 },
+          to: { transform: 'scale(1)', opacity: 1 },
           config: { mass: 3, tension: 280 },
-          delay: 300
+          delay: 150
         }).start();
         slideInActionsCtrl.update({
           from: { opacity: 0, transform: 'translateY(50px)' },
@@ -92,18 +92,18 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
         }).start();
         break;
       case 'leave':
-          slideAnimCtrl.update({
-            from: { transform: 'scale(1)' },
-            to: { transform: 'scale(0)' },
-            config: { mass: 1 }
-          }).start();
           slideInActionsCtrl.update({
-            from: { opacity: 1, transform: 'translateY(0)' },
-            to: { opacity: 0, transform: 'translateY(-50px)' }
+            from: { opacity: 1 },
+            to: { opacity: 0 }
           }).start();
           slideInTitleCtrl.update({
-            from: { opacity: 1, transform: 'translateY(0)' },
-            to: { opacity: 0, transform: 'translateY(50px)' }
+            from: { opacity: 1 },
+            to: { opacity: 0 }
+          }).start();
+          slideAnimCtrl.update({
+            from: { opacity: 1 },
+            to: { opacity: 0 },
+            config: { mass: 1 }
           }).start();
         break;
     }
