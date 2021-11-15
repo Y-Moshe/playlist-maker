@@ -14,17 +14,18 @@ interface LeftColumnProps {
   playList: VideoPlaceholderType[];
   onAddToPlaylist: ( vidProps: VideoPlaceholderType ) => void;
   onPlayVideo:     ( videoId: string ) => void;
+  onNewPlaylist:   () => void;
 }
 
 export function LeftColumn( props: LeftColumnProps ) {
-  const [ trailAnim, trailAnimCtrl ] = useTrail( props.playList.length || 0, () => ({
+  const trailAnim = useTrail( props.playList.length || 0, {
     from: { transform: 'translateX(-150px) scale(0.8)' },
     to:   { transform: 'translateX(0) scale(1)' },
     config: {
       mass: 2,
       tension: 280
     }
-  }));
+  });
 
   return (
     <Box sx = { leftColumnStyle }>
@@ -51,7 +52,12 @@ export function LeftColumn( props: LeftColumnProps ) {
         ))
       }
       <Divider />
-      <Button>New+</Button>
+      <Button
+        fullWidth
+        sx = {{ m: 1 }}
+        onClick = { props.onNewPlaylist }>
+          New+
+      </Button>
       <ul>
         <li>Playlist #1</li>
         <li>Playlist #2</li>
