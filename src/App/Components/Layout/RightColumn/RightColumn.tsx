@@ -71,7 +71,6 @@ export function RightColumn( props: RightColumnProps ) {
         </Button>
       </Box>
       <Divider />
-      <p>Results:</p>
       {
         videoList && searchTrailAnim.map(( animationStyle, i) => (
           <a.div
