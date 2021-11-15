@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTrail, a } from 'react-spring';
+import { useTrail, a, useSpring } from 'react-spring';
 import { TextField, Divider, Button } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { Box, SxProps, Theme } from '@mui/system';
@@ -24,6 +24,14 @@ export function RightColumn( props: RightColumnProps ) {
   const [ searchTrailAnim, searchTrailAnimCtrl ] = useTrail( videoList?.length || 0, () => ({
     from: { transform: 'translateX(150px) scale(0.8)' }
   }));
+  const textFieldAnim = useSpring({
+    from: { transform: 'translateX(-50px)' },
+    to:   { transform: 'translateX(0)' }
+  });
+  const searchBtnAnim = useSpring({
+    from: { transform: 'translateX(50px)' },
+    to:   { transform: 'translateX(0)' }
+  });
 
   const handleClick = () => {
     searchVideos( searchInput, 10 )
@@ -57,18 +65,24 @@ export function RightColumn( props: RightColumnProps ) {
   return (
     <Box sx = { rightColumnStyle }>
       <Box sx = {{ display: 'flex', m: 1 }}>
-        <TextField size = "small"
-          label   = "Search"
-          variant = "outlined"
-          value   = { searchInput }
-          onChange  = { e => setSearchInput( e.target.value ) }
-          onKeyDown = { e => handleEnterPress( e.key ) } />
-        <Button
-          sx = {{ ml: 1 }}
-          variant = "contained"
-          onClick = { handleClick }>
-          <Search />
-        </Button>
+        <a.div style = { textFieldAnim }>
+          <TextField
+            size = "small"
+            label   = "Search"
+            variant = "outlined"
+            value   = { searchInput }
+            onChange  = { e => setSearchInput( e.target.value ) }
+            onKeyDown = { e => handleEnterPress( e.key ) }
+          />
+        </a.div>
+        <a.div style = { searchBtnAnim }>
+          <Button
+            sx = {{ ml: 1 }}
+            variant = "contained"
+            onClick = { handleClick }>
+            <Search />
+          </Button>
+        </a.div>
       </Box>
       <Divider />
       {
