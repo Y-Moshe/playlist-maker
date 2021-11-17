@@ -1,6 +1,6 @@
 import { useState, CSSProperties } from 'react';
 import { Player, Youtube } from '@vime/react';
-import { Button, Box } from '@mui/material';
+import { Button, Box, Divider } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
 
 import { Footer, Header, LeftColumn, RightColumn } from './Components';
@@ -25,7 +25,8 @@ const playerActionsStyle: SxProps<Theme> = {
 
 const playerContainerStyle: SxProps<Theme> = {
   width: 1,
-  m: 1,
+  maxWidth: 800,
+  m: 'auto',
   boxShadow: '0 0 15px grey'
 };
 
@@ -40,6 +41,12 @@ export default function App() {
   };
 
   const handleAddToPlaylist = ( vidProps: VideoPlaceholderType ) => {
+    const item = playList.find( item => item.id === vidProps.id );
+    if ( item ) {
+      window.alert( 'already exists in current playlist!' );
+      return;
+    }
+
     setPlaylist( prev => [ ...prev, vidProps ]);
   };
 
@@ -75,49 +82,62 @@ export default function App() {
     videoId2Play && handlePlayVideo( videoId2Play );
   };
 
+  const handleNewPlaylist = () => {
+
+  };
+
   return (
     <div style = { appStyle }>
       <Header />
 
       <Box component = "main" sx = { mainStyle }>
         <LeftColumn
-          playList = { playList }
+          playList        = { playList }
           onPlayVideo     = { handlePlayVideo }
           onAddToPlaylist = { handleAddToPlaylist }
+          onRemoveVideo   = { handleRemoveFromPlaylist }
+          onNewPlaylist   = { handleNewPlaylist }
         />
 
-        <Box sx = {{ flexGrow: 1 }}>
+        <Box sx = {{ flexGrow: 1, mt: 2, mr: 1 }}>
           {
             currentPlaying &&
-            <Box sx = { playerContainerStyle }>
-              <Player
-                controls
-                onVmPlaybackEnded = { () => handlePlayNextInPlaylist() }>
-                <Youtube videoId  = { currentPlaying } />
-              </Player>
-            </Box>
+            <>
+              <Box sx = { playerContainerStyle }>
+                <Player
+                  controls
+                  onVmPlaybackEnded = { () => handlePlayNextInPlaylist() }>
+                  <Youtube videoId  = { currentPlaying } />
+                </Player>
+              </Box>
+
+              <Divider sx = {{ m: 2 }} />
+
+              <Box sx = { playerActionsStyle }>
+                <Button
+                  size    = "large"
+                  color   = "warning"
+                  variant = "outlined"
+                  onClick = { handleRandomizePlaylist }>
+                    Randomize playlist
+                </Button>
+                <Button
+                  size    = "large"
+                  color   = "success"
+                  variant = "contained"
+                  onClick = { () => handleSaveToPlaylist( currentPlaying ) }>
+                    Save playlist
+                </Button>
+              </Box>
+            </>
           }
-          <Box sx = { playerActionsStyle }>
-            <Button
-              size    = "large"
-              color   = "warning"
-              variant = "outlined"
-              onClick = { handleRandomizePlaylist }>
-                Randomize playlist
-            </Button>
-            <Button
-              size    = "large"
-              color   = "success"
-              variant = "contained"
-              onClick = { () => handleSaveToPlaylist( currentPlaying ) }>
-                Save playlist
-            </Button>
-          </Box>
         </Box>
 
         <RightColumn
+          playList        = { playList }
           onPlayVideo     = { handlePlayVideo }
           onAddToPlaylist = { handleAddToPlaylist }
+          onRemoveVideo   = { handleRemoveFromPlaylist }
         />
       </Box>
 

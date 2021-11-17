@@ -14,8 +14,10 @@ const rightColumnStyle: SxProps<Theme> = {
 };
 
 interface RightColumnProps {
+  playList: VideoPlaceholderType[];
   onAddToPlaylist: ( vidProps: VideoPlaceholderType ) => void;
   onPlayVideo:     ( videoId: string ) => void;
+  onRemoveVideo:   ( videoId: string ) => void;
 }
 
 export function RightColumn( props: RightColumnProps ) {
@@ -86,16 +88,18 @@ export function RightColumn( props: RightColumnProps ) {
       </Box>
       <Divider />
       {
-        videoList && searchTrailAnim.map(( animationStyle, i) => (
+        videoList && videoList.map(( video, i) => (
           <a.div
-            key = { videoList[i].id }
-            style = { animationStyle }>
+            key = { video.id }
+            style = { searchTrailAnim[i] }>
             <VideoPlaceholder
-              videoId   = { videoList[i].id }
-              thumbnail = { videoList[i].thumbnail }
-              title     = { videoList[i].title }
-              onPlayVideo = { props.onPlayVideo }
+              videoId   = { video.id }
+              thumbnail = { video.thumbnail }
+              title     = { video.title }
+              isInPlaylist    = { props.playList.find( item => item.id === video.id ) !== undefined }
+              onPlayVideo     = { props.onPlayVideo }
               onAddToPlaylist = { props.onAddToPlaylist }
+              onRemoveVideo   = { props.onRemoveVideo }
             />
           </a.div>
         ))

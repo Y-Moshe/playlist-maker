@@ -14,6 +14,7 @@ interface LeftColumnProps {
   playList: VideoPlaceholderType[];
   onAddToPlaylist: ( vidProps: VideoPlaceholderType ) => void;
   onPlayVideo:     ( videoId: string ) => void;
+  onRemoveVideo:   ( videoId: string ) => void;
   onNewPlaylist:   () => void;
 }
 
@@ -37,16 +38,18 @@ export function LeftColumn( props: LeftColumnProps ) {
       </Alert>
       <Divider />
       {
-        props.playList.length > 0 && trailAnim.map(( animationStyle, i) => (
+        props.playList.length > 0 && props.playList.map(( video, i) => (
           <a.div
-            key = { props.playList[i].id }
-            style = { animationStyle }>
+            key = { video.id }
+            style = { trailAnim[i] }>
             <VideoPlaceholder
-              videoId   = { props.playList[i].id }
-              thumbnail = { props.playList[i].thumbnail }
-              title     = { props.playList[i].title }
-              onPlayVideo = { props.onPlayVideo }
+              videoId   = { video.id }
+              thumbnail = { video.thumbnail }
+              title     = { video.title }
+              isInPlaylist    = { props.playList.find( item => item.id === video.id ) !== undefined }
+              onPlayVideo     = { props.onPlayVideo }
               onAddToPlaylist = { props.onAddToPlaylist }
+              onRemoveVideo   = { props.onRemoveVideo }
             />
           </a.div>
         ))

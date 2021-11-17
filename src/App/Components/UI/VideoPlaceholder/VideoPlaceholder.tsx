@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 import { useSpring, a } from 'react-spring';
-import { Box, Button, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
-import { Add, PlayArrow } from '@mui/icons-material';
+import { Add, Remove, PlayArrow } from '@mui/icons-material';
 
 import { ThumbnailType, VideoPlaceholderType } from '../../../Types';
 
@@ -49,11 +49,13 @@ const slider: CSSProperties = {
 };
 
 export interface VideoPlaceholderProps {
+  isInPlaylist: boolean;
   videoId: string;
   thumbnail: ThumbnailType;
   title: string;
   onAddToPlaylist: ( vidProps: VideoPlaceholderType ) => void;
-  onPlayVideo: ( videoId: string ) => void;
+  onPlayVideo:     ( videoId: string ) => void;
+  onRemoveVideo:   ( videoId: string ) => void;
 }
 
 export function VideoPlaceholder( props: VideoPlaceholderProps ) {
@@ -138,13 +140,28 @@ export function VideoPlaceholder( props: VideoPlaceholderProps ) {
             Play
           </Button>
         </Tooltip>
-        <Tooltip title ="Add to Playlist">
-          <Button
-            color = "info"
-            onClick   = { handleAddToPlaylist }>
-              <Add titleAccess = "Add to Playlist" />
-          </Button>
-        </Tooltip>
+        {
+          !props.isInPlaylist &&
+          <Tooltip title ="Add to Playlist">
+            <IconButton
+              size    = "small"
+              color   = "info"
+              onClick = { handleAddToPlaylist }>
+                <Add />
+            </IconButton>
+          </Tooltip>
+        }
+        {
+          props.isInPlaylist &&
+          <Tooltip title ="Remove from Playlist">
+            <IconButton
+              size    = "small"
+              color   = "info"
+              onClick = { () => props.onRemoveVideo( props.videoId ) }>
+                <Remove />
+            </IconButton>
+          </Tooltip>
+        }
       </a.div>
     </Box>
   )
