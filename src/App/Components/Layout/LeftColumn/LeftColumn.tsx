@@ -6,8 +6,14 @@ import { VideoPlaceholder } from '../../../Components';
 import { VideoPlaceholderType } from '../../../Types';
 
 const leftColumnStyle: SxProps<Theme> = {
-  width: 350,
-  p: 1.5
+  width: 370,
+  p: 1.5,
+};
+
+const videosContainerStyle: SxProps<Theme> = {
+  p: 1,
+  overflowY: 'scroll',
+  maxHeight: 650
 };
 
 interface LeftColumnProps {
@@ -36,25 +42,6 @@ export function LeftColumn( props: LeftColumnProps ) {
         severity = "info">
           Current playlist
       </Alert>
-      <Divider />
-      {
-        props.playList.length > 0 && props.playList.map(( video, i) => (
-          <a.div
-            key = { video.id }
-            style = { trailAnim[i] }>
-            <VideoPlaceholder
-              videoId   = { video.id }
-              thumbnail = { video.thumbnail }
-              title     = { video.title }
-              isInPlaylist    = { props.playList.find( item => item.id === video.id ) !== undefined }
-              onPlayVideo     = { props.onPlayVideo }
-              onAddToPlaylist = { props.onAddToPlaylist }
-              onRemoveVideo   = { props.onRemoveVideo }
-            />
-          </a.div>
-        ))
-      }
-      <Divider />
       <Button
         fullWidth
         sx = {{ m: 1 }}
@@ -66,6 +53,26 @@ export function LeftColumn( props: LeftColumnProps ) {
         <li>Playlist #2</li>
         <li>Playlist #3</li>
       </ul>
+      <Divider sx = {{ m: 1 }} />
+      <Box sx = { videosContainerStyle }>
+        {
+          props.playList.length > 0 && props.playList.map(( video, i ) => (
+            <a.div
+              key = { video.id }
+              style = { trailAnim[i] }>
+              <VideoPlaceholder
+                videoId   = { video.id }
+                thumbnail = { video.thumbnail }
+                title     = { video.title }
+                isInPlaylist    = { props.playList.find( item => item.id === video.id ) !== undefined }
+                onPlayVideo     = { props.onPlayVideo }
+                onAddToPlaylist = { props.onAddToPlaylist }
+                onRemoveVideo   = { props.onRemoveVideo }
+              />
+            </a.div>
+          ))
+        }
+      </Box>
     </Box>
   )
 }

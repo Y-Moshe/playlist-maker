@@ -9,8 +9,14 @@ import { VideoPlaceholderType } from '../../../Types';
 import { searchVideos } from '../../../../API';
 
 const rightColumnStyle: SxProps<Theme> = {
-  width: 350,
+  width: 370,
   p: 1.5
+};
+
+const videosContainerStyle: SxProps<Theme> = {
+  p: 1,
+  overflowY: 'scroll',
+  maxHeight: 750
 };
 
 interface RightColumnProps {
@@ -87,23 +93,25 @@ export function RightColumn( props: RightColumnProps ) {
         </a.div>
       </Box>
       <Divider />
-      {
-        videoList && videoList.map(( video, i) => (
-          <a.div
-            key = { video.id }
-            style = { searchTrailAnim[i] }>
-            <VideoPlaceholder
-              videoId   = { video.id }
-              thumbnail = { video.thumbnail }
-              title     = { video.title }
-              isInPlaylist    = { props.playList.find( item => item.id === video.id ) !== undefined }
-              onPlayVideo     = { props.onPlayVideo }
-              onAddToPlaylist = { props.onAddToPlaylist }
-              onRemoveVideo   = { props.onRemoveVideo }
-            />
-          </a.div>
-        ))
-      }
+      <Box sx = { videosContainerStyle }>
+        {
+          videoList && videoList.map(( video, i) => (
+            <a.div
+              key = { video.id }
+              style = { searchTrailAnim[i] }>
+              <VideoPlaceholder
+                videoId   = { video.id }
+                thumbnail = { video.thumbnail }
+                title     = { video.title }
+                isInPlaylist    = { props.playList.find( item => item.id === video.id ) !== undefined }
+                onPlayVideo     = { props.onPlayVideo }
+                onAddToPlaylist = { props.onAddToPlaylist }
+                onRemoveVideo   = { props.onRemoveVideo }
+              />
+            </a.div>
+          ))
+        }
+      </Box>
     </Box>
   )
 }
